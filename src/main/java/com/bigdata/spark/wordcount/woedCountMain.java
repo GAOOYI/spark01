@@ -13,7 +13,8 @@ import scala.Tuple2;
 import java.util.Arrays;
 import java.util.Iterator;
 
-public class woedCountMain {
+public class
+woedCountMain {
     public static void main(String[] args) {
 
         // 编写Spark应用程序
