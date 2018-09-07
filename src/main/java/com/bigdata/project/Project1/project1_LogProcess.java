@@ -13,7 +13,7 @@ public class project1_LogProcess {
         JavaSparkContext jsc = new JavaSparkContext(conf);
 
         //读取数据
-        JavaRDD<String> lines = jsc.textFile("C:\\Users\\Gaoyi\\Desktop\\access.log",6);
+        JavaRDD<String> lines = jsc.textFile("C:\\Users\\dell\\Desktop\\access.log",6);
 
         //处理数据
         lines.mapToPair(line -> {                 //转换为key - value 对形式

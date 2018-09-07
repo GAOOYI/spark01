@@ -19,6 +19,8 @@ public class JSONDataSource {
         JavaSparkContext sc = new JavaSparkContext(conf);
         SQLContext sqlContext = new SQLContext(sc);
 
+
+
         //针对JSON文件创建dataframe
         Dataset<Row> studentScoresDF = sqlContext.read().json("hdfs://centos01:9000/spark-study/students.json");
         //读取本地数据源
@@ -51,6 +53,7 @@ public class JSONDataSource {
             }
         }
         sql += ")";
+
 
         //在studentInfoDs中查询
         Dataset<Row> GT80studentInfoDs = sqlContext.sql(sql);

@@ -1,9 +1,12 @@
 package com.bigdata.sparksql.hive;
 
 import org.apache.spark.SparkConf;
+import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SQLContext;
+import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.hive.HiveContext;
 
 public class HiveDataSource {
@@ -12,10 +15,12 @@ public class HiveDataSource {
         JavaSparkContext sc = new JavaSparkContext(conf);
         HiveContext hiveContext = new HiveContext(sc.sc());
 
+
         hiveContext.sql("DROP TABLE IF EXISTS student_infos");
         hiveContext.sql("CREATE TABLE IF NOT EXISTS student_infos (name STRING,  age INT)");
         hiveContext.sql("LOAD DATA LOCAL INPATH '/home/hadoop/spark-study/resources/student_infos.txt' INTO TABLE student_infos");
 
+        Dataset<Row> user = hiveContext.table("user");
 
         hiveContext.sql("DROP TABLE IF EXISTS student_scores");
         hiveContext.sql("CREATE TABLE IF NOT EXISTS student_scores (name STRING,  score INT)");
@@ -26,6 +31,8 @@ public class HiveDataSource {
                 "join student_scores s2 " +
                 "on s1.name=s2.name " +
                 "where s2.score>=80");
+
+
 
         hiveContext.sql("DROP TABLE IF EXISTS goodstudent");
         GT80.registerTempTable("good_student");
